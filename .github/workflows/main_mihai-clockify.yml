@@ -1,0 +1,36 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Run De-Clockify
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '20 13 * * *'
+
+env:
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '18.x' # set this to the node version to use (supports 8.x, 10.x, 12.x)
+  CLOCKIFY_API_KEY: ${{ secrets.CLOCKIFY_API_KEY }}
+  WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
+  USER_ID: ${{ vars.USER_ID }}
+  ENTRY_DESCRIPTION: ${{ vars.ENTRY_DESCRIPTION }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+
+      - name: Setup Node ${{ env.NODE_VERSION }} Environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 'Run function'
+        shell: bash
+        run: |
+          npm install
+          npm run start

@@ -1,0 +1,30 @@
+{
+  "name": "clockify-automation",
+  "version": "1.0.0",
+  "description": "Don't need to clockify your time.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf ./build && tsc --module es2015 --target es2015",
+    "start": "npm run build && node build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ltemihai/clockify-automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ltemihai/clockify-automation/issues"
+  },
+  "homepage": "https://github.com/ltemihai/clockify-automation#readme",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
