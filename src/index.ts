@@ -34,7 +34,6 @@ const addTodayEntry = async (date: string, apiKey: string, workspaceId: string, 
     const body = {
         start: `${date}T07:00:00.000Z`,
         end: `${date}T15:00:00.000Z`,
-        billable: true,
         description: "Hibob",
         projectId: "602eb7ffa9972f2734c16620",
         taskId: "64c322cf89afca11f09ba8de",
