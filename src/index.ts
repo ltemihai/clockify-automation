@@ -12,7 +12,7 @@ const getTodayEntires = async (date: string, apiKey: string, workspaceId: string
 
     const url = `https://global.api.clockify.me/workspaces/${workspaceId}/timeEntries/users/${userId}/in-range?start=${date}T00:00:00.000Z&end=${date}T23:59:59.999Z`
 
-    return await (await fetch(url, {
+    const response = await fetch(url, {
         "headers": {
             "accept": "application/json",
             "accept-language": "en",
@@ -24,7 +24,16 @@ const getTodayEntires = async (date: string, apiKey: string, workspaceId: string
         },
         "body": null,
         "method": "GET"
-    })).json() as []
+    });
+
+    if (response.status < 200 || response.status >= 300) {
+        console.log('-------! There was an error, please read logs !-------');
+        console.log(`Status: ${response.status}`);
+        console.log(await response.json());
+        return;
+    }
+
+    return await response.json() as []
 
 
 }
@@ -55,7 +64,16 @@ const addTodayEntry = async (date: string, apiKey: string, workspaceId: string, 
         "method": "POST"
     });
 
-    return await (await request).json()
+    const response = await request;
+
+    if (response.status < 200 || response.status >= 300) {
+        console.log('-------! There was an error, please read logs !-------');
+        console.log(`Status: ${response.status}`);
+        console.log(await response.json());
+        return;
+    }
+
+    return await response.json()
 }
 
 const isWeekend = (date: Date) => {
